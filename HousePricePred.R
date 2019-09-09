@@ -349,3 +349,29 @@ rmse(Validationf$SalePrice, svm_pred)
 model_train <- xgb.DMatrix(data = data.matrix(Trainingf), label = Trainingf[,153])
 model_val <- xgb.DMatrix(data = data.matrix(Validationf), label = Validationf[,153])
 
+
+#Testing
+control <- trainControl(method = "cv",
+number = 5,
+savePredictions = "final",
+allowParallel = TRUE)
+
+
+grid = expand.grid(nrounds = c(1000,1200,1500),
+max_depth = c(6,8,10),
+eta = c(0.025, 0.01),
+gamma = c(0.1),
+colsample_bytree = c(1),
+min_child_weight = c(1),
+subsample = c(0.8))
+
+
+
+grid1 = expand.grid(nrounds = 1000,
+max_depth = seq(4,8,by = 1),
+eta = 0.025,
+gamma = 0.1,
+colsample_bytree = 1.0,
+subsample = 1.0,
+min_child_weight = 4)
+
